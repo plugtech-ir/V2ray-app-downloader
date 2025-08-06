@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دانلود V2RayNG</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --accent-color: #2c3e50;
+            --button-color: #3498db;
+            --button-hover-color: #2980b9;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .version-info {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: var(--button-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .download-button:hover {
+            background-color: var(--button-hover-color);
+            transform: translateY(-2px);
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--accent-color);
+            animation: spin 1s ease infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .github-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .github-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>دانلود V2RayNG</h1>
+        <p>برای دریافت آخرین نسخه برنامه V2RayNG روی دکمه زیر کلیک کنید.</p>
+        
+        <div id="content-area">
+            <div class="spinner"></div>
+        </div>
+
+        <a class="github-link" href="https://github.com/2dust/v2rayNG" target="_blank">مشاهده مخزن در گیت‌هاب</a>
+    </div>
+
+    <script>
+        const contentArea = document.getElementById('content-area');
+
+        // تابع برای دریافت آخرین نسخه از گیت‌هاب
+        async function getLatestRelease() {
+            try {
+                // API گیت‌هاب برای دریافت آخرین Release از مخزن 2dust/v2rayNG
+                const response = await fetch('https://api.github.com/repos/2dust/v2rayNG/releases/latest');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                const latestVersion = data.tag_name;
+                
+                // پیدا کردن فایل APK در لیست Assetها
+                const apkAsset = data.assets.find(asset => 
+                    asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
+                );
+                
+                if (!apkAsset) {
+                    throw new Error('فایل APK یافت نشد.');
+                }
+                
+                const downloadUrl = apkAsset.browser_download_url;
+                
+                // جایگزین کردن محتوای Spinner با دکمه دانلود و اطلاعات نسخه
+                contentArea.innerHTML = `
+                    <div class="version-info">
+                        نسخه فعلی: ${latestVersion}
+                    </div>
+                    <a href="${downloadUrl}" class="download-button" target="_blank" download>دانلود مستقیم</a>
+                `;
+                
+            } catch (error) {
+                console.error("Error fetching release:", error);
+                contentArea.innerHTML = `
+                    <div class="version-info" style="color: #e74c3c;">
+                        مشکلی در دریافت اطلاعات پیش آمد.
+                    </div>
+                `;
+            }
+        }
+
+        // اجرای تابع هنگام بارگذاری صفحه
+        document.addEventListener('DOMContentLoaded', getLatestRelease);
+    </script>
+
+</body>
+</html>
