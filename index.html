@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دانلود V2RayNG</title>
+    <title>V2RayNG Downloader</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Vazirmatn:wght@400;700&display=swap');
         
         :root {
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --accent-color: #2c3e50;
-            --button-color: #3498db;
-            --button-hover-color: #2980b9;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --text-color: #e0e0e0;
+            --neon-blue: #00f0ff;
+            --neon-pink: #f000ff;
+            --glow-shadow-blue: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+            --glow-shadow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         body {
@@ -26,22 +27,53 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0d0d0d 25%, rgba(0, 240, 255, 0.05) 50%, #0d0d0d 75%);
+            background-size: 200% 200%;
+            animation: background-pan 15s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes background-pan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
+            z-index: 1;
             text-align: center;
-            padding: 40px;
+            padding: 50px;
             background-color: var(--card-bg);
+            border: 2px solid var(--neon-blue);
             border-radius: 12px;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow), var(--glow-shadow-blue);
             width: 90%;
             max-width: 500px;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: var(--box-shadow), var(--glow-shadow-pink);
+            border-color: var(--neon-pink);
         }
 
         h1 {
-            color: var(--accent-color);
-            font-size: 2.2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--neon-blue);
         }
 
         p {
@@ -54,33 +86,39 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 30px;
-            color: var(--accent-color);
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
         }
 
         .download-button {
             display: inline-block;
-            padding: 14px 28px;
-            background-color: var(--button-color);
-            color: white;
+            padding: 15px 30px;
+            background: var(--neon-blue);
+            color: var(--card-bg);
             text-decoration: none;
             border-radius: 8px;
             font-size: 1.1rem;
             font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
+            text-shadow: none;
+            box-shadow: 0 0 15px var(--neon-blue);
         }
         
         .download-button:hover {
-            background-color: var(--button-hover-color);
-            transform: translateY(-2px);
+            background-color: var(--neon-pink);
+            color: var(--card-bg);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-pink);
+            cursor: pointer;
         }
 
         .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
+            border: 4px solid rgba(255, 255, 255, 0.1);
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            border-left-color: var(--accent-color);
-            animation: spin 1s ease infinite;
+            border-left-color: var(--neon-blue);
+            animation: spin 1s linear infinite;
             margin: 0 auto 30px;
         }
 
@@ -89,15 +127,17 @@
             100% { transform: rotate(360deg); }
         }
 
-        .github-link {
+        .telegram-link {
             display: block;
             margin-top: 25px;
             font-size: 0.9rem;
             color: var(--text-color);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         
-        .github-link:hover {
+        .telegram-link:hover {
+            color: var(--neon-pink);
             text-decoration: underline;
         }
     </style>
@@ -105,14 +145,14 @@
 <body>
 
     <div class="container">
-        <h1>دانلود V2RayNG</h1>
+        <h1>V2RayNG Downloader</h1>
         <p>برای دریافت آخرین نسخه برنامه V2RayNG روی دکمه زیر کلیک کنید.</p>
         
         <div id="content-area">
             <div class="spinner"></div>
         </div>
 
-        <a class="github-link" href="https://github.com/2dust/v2rayNG" target="_blank">مشاهده مخزن در گیت‌هاب</a>
+        <a class="telegram-link" href="https://t.me/wolf_vpn02" target="_blank">کانال تلگرام ما</a>
     </div>
 
     <script>
@@ -149,6 +189,24 @@
                         نسخه فعلی: ${latestVersion}
                     </div>
                     <a href="${downloadUrl}" class="download-button" target="_blank" download>دانلود مستقیم</a>
+                `;
+                
+            } catch (error) {
+                console.error("Error fetching release:", error);
+                contentArea.innerHTML = `
+                    <div class="version-info" style="color: #e74c3c;">
+                        مشکلی در دریافت اطلاعات پیش آمد.
+                    </div>
+                `;
+            }
+        }
+
+        // اجرای تابع هنگام بارگذاری صفحه
+        document.addEventListener('DOMContentLoaded', getLatestRelease);
+    </script>
+
+</body>
+</html>                    <a href="${downloadUrl}" class="download-button" target="_blank" download>دانلود مستقیم</a>
                 `;
                 
             } catch (error) {
