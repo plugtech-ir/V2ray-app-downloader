@@ -206,22 +206,4 @@
     </script>
 
 </body>
-</html>                    <a href="${downloadUrl}" class="download-button" target="_blank" download>دانلود مستقیم</a>
-                `;
-                
-            } catch (error) {
-                console.error("Error fetching release:", error);
-                contentArea.innerHTML = `
-                    <div class="version-info" style="color: #e74c3c;">
-                        مشکلی در دریافت اطلاعات پیش آمد.
-                    </div>
-                `;
-            }
-        }
-
-        // اجرای تابع هنگام بارگذاری صفحه
-        document.addEventListener('DOMContentLoaded', getLatestRelease);
-    </script>
-
-</body>
 </html>
