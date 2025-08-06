@@ -85,7 +85,7 @@
         .version-info {
             font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: var(--neon-pink);
             text-shadow: 0 0 5px var(--neon-pink);
         }
@@ -102,6 +102,7 @@
             transition: all 0.3s ease;
             text-shadow: none;
             box-shadow: 0 0 15px var(--neon-blue);
+            margin-bottom: 20px;
         }
         
         .download-button:hover {
@@ -140,6 +141,34 @@
             color: var(--neon-pink);
             text-decoration: underline;
         }
+        
+        .old-versions-container {
+            margin-top: 20px;
+        }
+        
+        #old-versions-select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        #old-versions-select:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        
+        #old-versions-select option {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
     </style>
 </head>
 <body>
@@ -151,10 +180,10 @@
         <div id="content-area">
             <div class="spinner"></div>
         </div>
-
-        <a class
-        <div id="content-area">
-            <div class="spinner"></div>
+        
+        <div class="old-versions-container">
+            <p>نسخه‌های قدیمی‌تر:</p>
+            <select id="old-versions-select" style="display: none;"></select>
         </div>
 
         <a class="telegram-link" href="https://t.me/wolf_vpn02" target="_blank">کانال تلگرام ما</a>
@@ -162,42 +191,59 @@
 
     <script>
         const contentArea = document.getElementById('content-area');
+        const oldVersionsSelect = document.getElementById('old-versions-select');
+        let allReleases = [];
 
-        // تابع برای دریافت آخرین نسخه از گیت‌هاب
-        async function getLatestRelease() {
+        async function getReleases() {
             try {
-                // API گیت‌هاب برای دریافت آخرین Release از مخزن 2dust/v2rayNG
-                const response = await fetch('https://api.github.com/repos/2dust/v2rayNG/releases/latest');
+                const response = await fetch('https://api.github.com/repos/2dust/v2rayNG/releases');
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                const data = await response.json();
+                allReleases = await response.json();
                 
-                const latestVersion = data.tag_name;
-                
-                // پیدا کردن فایل APK در لیست Assetها
-                const apkAsset = data.assets.find(asset => 
-                    asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
-                );
-                
-                if (!apkAsset) {
-                    throw new Error('فایل APK یافت نشد.');
+                // نمایش آخرین نسخه
+                if (allReleases.length > 0) {
+                    const latestRelease = allReleases[0];
+                    const latestVersion = latestRelease.tag_name;
+                    const apkAsset = latestRelease.assets.find(asset => 
+                        asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
+                    );
+                    
+                    if (apkAsset) {
+                        contentArea.innerHTML = `
+                            <div class="version-info">
+                                آخرین نسخه: ${latestVersion}
+                            </div>
+                            <a href="${apkAsset.browser_download_url}" class="download-button" target="_blank" download>دانلود مستقیم</a>
+                        `;
+                    }
                 }
                 
-                const downloadUrl = apkAsset.browser_download_url;
-                
-                // جایگزین کردن محتوای Spinner با دکمه دانلود و اطلاعات نسخه
-                contentArea.innerHTML = `
-                    <div class="version-info">
-                        نسخه فعلی: ${latestVersion}
-                    </div>
-                    <a href="${downloadUrl}" class="download-button" target="_blank" download>دانلود مستقیم</a>
-                `;
+                // پر کردن منوی کشویی نسخه‌های قدیمی
+                if (allReleases.length > 1) {
+                    oldVersionsSelect.style.display = 'block';
+                    // اولین گزینه را که آخرین نسخه است، حذف می‌کنیم
+                    const olderReleases = allReleases.slice(1); 
+                    
+                    olderReleases.forEach(release => {
+                        const apkAsset = release.assets.find(asset => 
+                            asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
+                        );
+                        
+                        if (apkAsset) {
+                            const option = document.createElement('option');
+                            option.value = apkAsset.browser_download_url;
+                            option.textContent = release.tag_name;
+                            oldVersionsSelect.appendChild(option);
+                        }
+                    });
+                }
                 
             } catch (error) {
-                console.error("Error fetching release:", error);
+                console.error("Error fetching releases:", error);
                 contentArea.innerHTML = `
                     <div class="version-info" style="color: #e74c3c;">
                         مشکلی در دریافت اطلاعات پیش آمد.
@@ -205,9 +251,21 @@
                 `;
             }
         }
+        
+        // تغییر لینک دانلود هنگام انتخاب نسخه قدیمی
+        oldVersionsSelect.addEventListener('change', (event) => {
+            const selectedUrl = event.target.value;
+            const downloadButton = document.querySelector('.download-button');
+            const selectedVersion = event.target.options[event.target.selectedIndex].text;
+            
+            // تغییر دکمه دانلود به نسخه انتخاب شده
+            if (downloadButton) {
+                downloadButton.href = selectedUrl;
+                document.querySelector('.version-info').innerHTML = `نسخه انتخاب شده: ${selectedVersion}`;
+            }
+        });
 
-        // اجرای تابع هنگام بارگذاری صفحه
-        document.addEventListener('DOMContentLoaded', getLatestRelease);
+        document.addEventListener('DOMContentLoaded', getReleases);
     </script>
 
 </body>
