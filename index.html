@@ -148,7 +148,7 @@
         
         /* App List */
         .app-list {
-            display: none;
+            display: none; /* مهم: لیست‌ها در ابتدا مخفی هستند */
         }
 
         .list-header {
@@ -222,12 +222,6 @@
             gap: 0.75rem;
         }
         
-        .accordion-title img {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-        }
-        
         .accordion-icon {
             transition: transform 0.3s ease;
             font-size: 0.9em;
@@ -241,7 +235,7 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease-out;
             background-color: #f9fafb;
         }
         
@@ -344,25 +338,20 @@
                         <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
                     </div>
                     <div class="accordion">
-                        <!-- v2rayNG -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">
-                                    v2rayNG
-                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                    v2rayNG <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
                                 </span>
                                 <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>محبوب‌ترین، ساده‌ترین و شناخته‌شده‌ترین کلاینت V2Ray برای اندروید. بهترین انتخاب برای اکثر کاربران با رابط کاربری ساده و پشتیبانی کامل از پروتکل‌های اصلی.</p>
-                                    <a href="https://github.com/2dust/v2rayNG/releases/latest" target="_blank" class="download-btn">
-                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
-                                    </a>
+                                    <p>محبوب‌ترین و شناخته‌شده‌ترین کلاینت V2Ray برای اندروید. بهترین انتخاب برای اکثر کاربران با رابط کاربری ساده و پشتیبانی کامل از پروتکل‌های اصلی.</p>
+                                    <a href="https://github.com/2dust/v2rayNG/releases/latest" target="_blank" class="download-btn"><i class="fas fa-download"></i> دانلود آخرین نسخه</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Hiddify-Next -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">Hiddify-Next</span>
@@ -370,14 +359,11 @@
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>یک کلاینت مدرن و قدرتمند که از پروتکل‌های متنوعی پشتیبانی می‌کند و بر روی چندین پلتفرم (از جمله اندروید) در دسترس است. رابط کاربری زیبایی دارد و به طور فعال توسعه داده می‌شود.</p>
-                                    <a href="https://github.com/hiddify/hiddify-next/releases/latest" target="_blank" class="download-btn">
-                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
-                                    </a>
+                                    <p>یک کلاینت مدرن و قدرتمند که از پروتکل‌های متنوعی پشتیبانی می‌کند و بر روی چندین پلتفرم (از جمله اندروید) در دسترس است. رابط کاربری زیبایی دارد.</p>
+                                    <a href="https://github.com/hiddify/hiddify-next/releases/latest" target="_blank" class="download-btn"><i class="fas fa-download"></i> دانلود آخرین نسخه</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- NekoBox -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">NekoBox</span>
@@ -386,9 +372,7 @@
                             <div class="accordion-content">
                                 <div class="accordion-body">
                                     <p>یک فورک از SagerNet که بسیار محبوب شده است. دارای امکانات زیاد و پشتیبانی از پروتکل‌های مختلف است و برای کاربران حرفه‌ای‌تر گزینه‌ی مناسبی می‌باشد.</p>
-                                    <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" target="_blank" class="download-btn">
-                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
-                                    </a>
+                                    <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" target="_blank" class="download-btn"><i class="fas fa-download"></i> دانلود آخرین نسخه</a>
                                 </div>
                             </div>
                         </div>
@@ -397,45 +381,37 @@
                 
                 <!-- iOS Apps -->
                 <div id="ios-apps" class="app-list">
-                    <div class="list-header">
+                     <div class="list-header">
                         <h2><i class="fab fa-apple"></i> برنامه‌های آی‌او‌اس</h2>
                         <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
                     </div>
                     <div class="accordion">
-                        <!-- Shadowrocket -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">
-                                    Shadowrocket
-                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                    Shadowrocket <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
                                 </span>
                                 <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>معروف‌ترین و قدرتمندترین اپلیکیشن برای iOS که از تمام پروتکل‌های محبوب پشتیبانی می‌کند. این برنامه پولی است اما به دلیل پایداری و امکانات فوق‌العاده، انتخاب اول اکثر کاربران است.</p>
-                                    <a href="https://apps.apple.com/us/app/shadowrocket/id932747118" target="_blank" class="download-btn">
-                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
-                                    </a>
+                                    <p>معروف‌ترین و قدرتمندترین اپلیکیشن برای iOS. این برنامه پولی است اما به دلیل پایداری و امکانات فوق‌العاده، انتخاب اول اکثر کاربران است.</p>
+                                    <a href="https://apps.apple.com/us/app/shadowrocket/id932747118" target="_blank" class="download-btn"><i class="fab fa-app-store-ios"></i> مشاهده در اپ استور</a>
                                 </div>
                             </div>
                         </div>
-                         <!-- Stash -->
-                        <div class="accordion-item">
+                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">Stash</span>
                                 <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>یک کلاینت قدرتمند بر پایه Clash با رابط کاربری زیبا و امکانات بسیار پیشرفته برای مدیریت قوانین (Rules). این برنامه نیز پولی است و برای کاربران حرفه‌ای عالی است.</p>
-                                    <a href="https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349" target="_blank" class="download-btn">
-                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
-                                    </a>
+                                    <p>یک کلاینت قدرتمند بر پایه Clash با رابط کاربری زیبا و امکانات بسیار پیشرفته برای مدیریت قوانین (Rules). این برنامه نیز پولی است.</p>
+                                    <a href="https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349" target="_blank" class="download-btn"><i class="fab fa-app-store-ios"></i> مشاهده در اپ استور</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- FoXray -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">FoXray</span>
@@ -443,10 +419,8 @@
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>یک کلاینت رایگان و باکیفیت برای iOS که از پروتکل‌های VLESS و VMess به خوبی پشتیبانی می‌کند. اگر به دنبال یک گزینه‌ی رایگان و قابل اعتماد هستید، FoXray انتخاب خوبی است.</p>
-                                    <a href="https://apps.apple.com/us/app/foxray/id6448898396" target="_blank" class="download-btn">
-                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
-                                    </a>
+                                    <p>یک کلاینت رایگان و باکیفیت برای iOS. اگر به دنبال یک گزینه‌ی رایگان و قابل اعتماد هستید، FoXray انتخاب خوبی است.</p>
+                                    <a href="https://apps.apple.com/us/app/foxray/id6448898396" target="_blank" class="download-btn"><i class="fab fa-app-store-ios"></i> مشاهده در اپ استور</a>
                                 </div>
                             </div>
                         </div>
@@ -460,28 +434,38 @@
                         <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
                     </div>
                     <div class="accordion">
-                        <!-- v2rayN -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">
-                                    v2rayN
-                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                    v2rayN <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
                                 </span>
                                 <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
                             <div class="accordion-content">
                                 <div class="accordion-body">
-                                    <p>استاندارد طلایی و محبوب‌ترین کلاینت برای ویندوز. استفاده از آن بسیار آسان است و از تمام قابلیت‌های هسته V2Ray پشتیبانی می‌کند. بهترین انتخاب برای شروع.</p>
-                                    <a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" class="download-btn">
-                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
-                                    </a>
+                                    <p>استاندارد طلایی و محبوب‌ترین کلاینت برای ویندوز. استفاده از آن بسیار آسان است و از تمام قابلیت‌های هسته V2Ray پشتیبانی می‌کند.</p>
+                                    <a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" class="download-btn"><i class="fas fa-download"></i> دانلود آخرین نسخه</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Hiddify-Next -->
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
                                 <span class="accordion-title">Hiddify-Next</span>
                                 <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
                             </div>
-    
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>نسخه ویندوز کلاینت مدرن Hiddify با رابط کاربری یکپارچه و زیبا. اگر از این برنامه روی گوشی خود استفاده می‌کنید، استفاده از آن در ویندوز تجربه مشابهی را به شما می‌دهد.</p>
+                                    <a href="https://github.com/hiddify/hiddify-next/releases/latest" target="_blank" class="download-btn"><i class="fas fa-download"></i> دانلود آخرین نسخه</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">NekoRay</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>یک کلاینت چند پلتفرمی (ویندوز و لینوکس) که بسیار قدرتمند است و از هسته‌های مختلفی پشتیبانی می‌کند. برای کاربران حرفه‌ای عالی است.</p>
+   
