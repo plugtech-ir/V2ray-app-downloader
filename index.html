@@ -1,272 +1,487 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V2RayNG Downloader</title>
+    <title>دانلود کلاینت‌های V2Ray برای تمام سیستم‌عامل‌ها</title>
+    <!-- فونت Vazirmatn -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap">
+    <!-- فونت آیکون Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Vazirmatn:wght@400;700&display=swap');
-        
         :root {
-            --bg-color: #0d0d0d;
-            --card-bg: #1a1a1a;
-            --text-color: #e0e0e0;
-            --neon-blue: #00f0ff;
-            --neon-pink: #f000ff;
-            --glow-shadow-blue: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
-            --glow-shadow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary-color: #f3f4f6;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --success-color: #10b981;
+            --success-bg: #d1fae5;
+            --success-text: #065f46;
+            --danger-color: #ef4444;
+            --border-radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+            background-color: #f8fafc;
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            line-height: 1.6;
+            padding: 0;
             margin: 0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #0d0d0d 25%, rgba(0, 240, 255, 0.05) 50%, #0d0d0d 75%);
-            background-size: 200% 200%;
-            animation: background-pan 15s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes background-pan {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .container {
-            z-index: 1;
+            width: 100%;
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card-header {
+            padding: 1.5rem;
             text-align: center;
-            padding: 50px;
-            background-color: var(--card-bg);
-            border: 2px solid var(--neon-blue);
-            border-radius: 12px;
-            box-shadow: var(--box-shadow), var(--glow-shadow-blue);
-            width: 90%;
-            max-width: 500px;
-            transition: all 0.3s ease;
+            border-bottom: 1px solid #e5e7eb;
+            position: relative;
         }
 
-        .container:hover {
-            box-shadow: var(--box-shadow), var(--glow-shadow-pink);
-            border-color: var(--neon-pink);
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px var(--neon-blue);
-        }
-
-        p {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .version-info {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
-        }
-
-        .download-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: var(--neon-blue);
-            color: var(--card-bg);
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+        .card-header h1 {
+            font-size: 1.5rem;
             font-weight: 700;
-            transition: all 0.3s ease;
-            text-shadow: none;
-            box-shadow: 0 0 15px var(--neon-blue);
-            margin-bottom: 20px;
+            color: var(--primary-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
         }
         
-        .download-button:hover {
-            background-color: var(--neon-pink);
-            color: var(--card-bg);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--neon-pink);
-            cursor: pointer;
+        #header-icon {
+            font-size: 1.3em;
+            transition: transform 0.3s ease;
         }
 
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: var(--neon-blue);
-            animation: spin 1s linear infinite;
-            margin: 0 auto 30px;
+        .card-body {
+            padding: 2rem;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background-color: var(--secondary-color);
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--light-text);
+            border-top: 1px solid #e5e7eb;
         }
 
-        .telegram-link {
-            display: block;
-            margin-top: 25px;
-            font-size: 0.9rem;
-            color: var(--text-color);
+        a {
+            color: var(--primary-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
+            font-weight: 500;
         }
-        
-        .telegram-link:hover {
-            color: var(--neon-pink);
+
+        a:hover {
+            color: var(--primary-hover);
             text-decoration: underline;
         }
         
-        .old-versions-container {
-            margin-top: 20px;
-        }
-        
-        #old-versions-select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid var(--neon-blue);
-            border-radius: 8px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 1rem;
+        /* OS Selection */
+        #os-selection .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
             text-align: center;
+        }
+
+        .os-card {
+            background-color: white;
+            padding: 2rem 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #e5e7eb;
             cursor: pointer;
-            outline: none;
+            transition: all 0.2s ease;
         }
-        
-        #old-versions-select:focus {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 10px var(--neon-pink);
+
+        .os-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
         }
-        
-        #old-versions-select option {
-            background-color: var(--card-bg);
+
+        .os-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .os-card h3 {
+            font-weight: 600;
             color: var(--text-color);
+        }
+        
+        .page-intro {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+        
+        /* App List */
+        .app-list {
+            display: none;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .list-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid #d1d5db;
+            color: var(--light-text);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .accordion-header {
+            background-color: white;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        .accordion-header:hover {
+            background-color: #f9fafb;
+        }
+        
+        .accordion-title {
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .accordion-title img {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.9em;
+            color: var(--light-text);
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #f9fafb;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px; /* Adjust as needed */
+        }
+        
+        .accordion-body {
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--light-text);
+        }
+        
+        .accordion-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            gap: 0.5rem;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .recommended-badge {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
         }
     </style>
 </head>
+
 <body>
-
     <div class="container">
-        <h1>V2RayNG Downloader</h1>
-        <p>برای دریافت آخرین نسخه برنامه V2RayNG روی دکمه زیر کلیک کنید.</p>
-        
-        <div id="content-area">
-            <div class="spinner"></div>
-        </div>
-        
-        <div class="old-versions-container">
-            <p>نسخه‌های قدیمی‌تر:</p>
-            <select id="old-versions-select" style="display: none;"></select>
-        </div>
+        <div class="card">
+            <div class="card-header">
+                <h1><i id="header-icon" class="fas fa-shield-alt"></i><span id="header-title">دانلود کلاینت‌های V2Ray</span></h1>
+            </div>
+            <div class="card-body">
 
-        <a class="telegram-link" href="https://t.me/wolf_vpn02" target="_blank">کانال تلگرام ما</a>
-    </div>
-
-    <script>
-        const contentArea = document.getElementById('content-area');
-        const oldVersionsSelect = document.getElementById('old-versions-select');
-        let allReleases = [];
-
-        async function getReleases() {
-            try {
-                const response = await fetch('https://api.github.com/repos/2dust/v2rayNG/releases');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                allReleases = await response.json();
-                
-                // نمایش آخرین نسخه
-                if (allReleases.length > 0) {
-                    const latestRelease = allReleases[0];
-                    const latestVersion = latestRelease.tag_name;
-                    const apkAsset = latestRelease.assets.find(asset => 
-                        asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
-                    );
-                    
-                    if (apkAsset) {
-                        contentArea.innerHTML = `
-                            <div class="version-info">
-                                آخرین نسخه: ${latestVersion}
-                            </div>
-                            <a href="${apkAsset.browser_download_url}" class="download-button" target="_blank" download>دانلود مستقیم</a>
-                        `;
-                    }
-                }
-                
-                // پر کردن منوی کشویی نسخه‌های قدیمی
-                if (allReleases.length > 1) {
-                    oldVersionsSelect.style.display = 'block';
-                    // اولین گزینه را که آخرین نسخه است، حذف می‌کنیم
-                    const olderReleases = allReleases.slice(1); 
-                    
-                    olderReleases.forEach(release => {
-                        const apkAsset = release.assets.find(asset => 
-                            asset.name.endsWith('.apk') && !asset.name.includes('arm64') && !asset.name.includes('armeabi')
-                        );
-                        
-                        if (apkAsset) {
-                            const option = document.createElement('option');
-                            option.value = apkAsset.browser_download_url;
-                            option.textContent = release.tag_name;
-                            oldVersionsSelect.appendChild(option);
-                        }
-                    });
-                }
-                
-            } catch (error) {
-                console.error("Error fetching releases:", error);
-                contentArea.innerHTML = `
-                    <div class="version-info" style="color: #e74c3c;">
-                        مشکلی در دریافت اطلاعات پیش آمد.
+                <!-- Step 1: OS Selection -->
+                <div id="os-selection">
+                    <p class="page-intro">سیستم عامل دستگاه خود را انتخاب کنید تا بهترین کلاینت‌ها برای شما نمایش داده شود.</p>
+                    <div class="selection-grid">
+                        <div class="os-card" onclick="showApps('android')">
+                            <i class="fab fa-android"></i>
+                            <h3>اندروید</h3>
+                        </div>
+                        <div class="os-card" onclick="showApps('ios')">
+                            <i class="fab fa-apple"></i>
+                            <h3>آی‌او‌اس</h3>
+                        </div>
+                        <div class="os-card" onclick="showApps('windows')">
+                            <i class="fab fa-windows"></i>
+                            <h3>ویندوز</h3>
+                        </div>
+                        <div class="os-card" onclick="showApps('macos')">
+                            <i class="fab fa-apple"></i>
+                            <h3>مک</h3>
+                        </div>
+                        <div class="os-card" onclick="showApps('linux')">
+                            <i class="fab fa-linux"></i>
+                            <h3>لینوکس</h3>
+                        </div>
                     </div>
-                `;
-            }
-        }
-        
-        // تغییر لینک دانلود هنگام انتخاب نسخه قدیمی
-        oldVersionsSelect.addEventListener('change', (event) => {
-            const selectedUrl = event.target.value;
-            const downloadButton = document.querySelector('.download-button');
-            const selectedVersion = event.target.options[event.target.selectedIndex].text;
-            
-            // تغییر دکمه دانلود به نسخه انتخاب شده
-            if (downloadButton) {
-                downloadButton.href = selectedUrl;
-                document.querySelector('.version-info').innerHTML = `نسخه انتخاب شده: ${selectedVersion}`;
-            }
-        });
+                </div>
 
-        document.addEventListener('DOMContentLoaded', getReleases);
-    </script>
+                <!-- Step 2: App Lists (Hidden by default) -->
+                
+                <!-- Android Apps -->
+                <div id="android-apps" class="app-list">
+                    <div class="list-header">
+                        <h2><i class="fab fa-android"></i> برنامه‌های اندروید</h2>
+                        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
+                    </div>
+                    <div class="accordion">
+                        <!-- v2rayNG -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">
+                                    v2rayNG
+                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                </span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>محبوب‌ترین، ساده‌ترین و شناخته‌شده‌ترین کلاینت V2Ray برای اندروید. بهترین انتخاب برای اکثر کاربران با رابط کاربری ساده و پشتیبانی کامل از پروتکل‌های اصلی.</p>
+                                    <a href="https://github.com/2dust/v2rayNG/releases/latest" target="_blank" class="download-btn">
+                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hiddify-Next -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">Hiddify-Next</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>یک کلاینت مدرن و قدرتمند که از پروتکل‌های متنوعی پشتیبانی می‌کند و بر روی چندین پلتفرم (از جمله اندروید) در دسترس است. رابط کاربری زیبایی دارد و به طور فعال توسعه داده می‌شود.</p>
+                                    <a href="https://github.com/hiddify/hiddify-next/releases/latest" target="_blank" class="download-btn">
+                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NekoBox -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">NekoBox</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>یک فورک از SagerNet که بسیار محبوب شده است. دارای امکانات زیاد و پشتیبانی از پروتکل‌های مختلف است و برای کاربران حرفه‌ای‌تر گزینه‌ی مناسبی می‌باشد.</p>
+                                    <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" target="_blank" class="download-btn">
+                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- iOS Apps -->
+                <div id="ios-apps" class="app-list">
+                    <div class="list-header">
+                        <h2><i class="fab fa-apple"></i> برنامه‌های آی‌او‌اس</h2>
+                        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
+                    </div>
+                    <div class="accordion">
+                        <!-- Shadowrocket -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">
+                                    Shadowrocket
+                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                </span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>معروف‌ترین و قدرتمندترین اپلیکیشن برای iOS که از تمام پروتکل‌های محبوب پشتیبانی می‌کند. این برنامه پولی است اما به دلیل پایداری و امکانات فوق‌العاده، انتخاب اول اکثر کاربران است.</p>
+                                    <a href="https://apps.apple.com/us/app/shadowrocket/id932747118" target="_blank" class="download-btn">
+                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Stash -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">Stash</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>یک کلاینت قدرتمند بر پایه Clash با رابط کاربری زیبا و امکانات بسیار پیشرفته برای مدیریت قوانین (Rules). این برنامه نیز پولی است و برای کاربران حرفه‌ای عالی است.</p>
+                                    <a href="https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349" target="_blank" class="download-btn">
+                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FoXray -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">FoXray</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>یک کلاینت رایگان و باکیفیت برای iOS که از پروتکل‌های VLESS و VMess به خوبی پشتیبانی می‌کند. اگر به دنبال یک گزینه‌ی رایگان و قابل اعتماد هستید، FoXray انتخاب خوبی است.</p>
+                                    <a href="https://apps.apple.com/us/app/foxray/id6448898396" target="_blank" class="download-btn">
+                                        <i class="fab fa-app-store-ios"></i> مشاهده در اپ استور
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-</body>
-</html>
+                <!-- Windows Apps -->
+                <div id="windows-apps" class="app-list">
+                    <div class="list-header">
+                        <h2><i class="fab fa-windows"></i> برنامه‌های ویندوز</h2>
+                        <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button>
+                    </div>
+                    <div class="accordion">
+                        <!-- v2rayN -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">
+                                    v2rayN
+                                    <span class="recommended-badge"><i class="fas fa-star"></i> پیشنهادی</span>
+                                </span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-body">
+                                    <p>استاندارد طلایی و محبوب‌ترین کلاینت برای ویندوز. استفاده از آن بسیار آسان است و از تمام قابلیت‌های هسته V2Ray پشتیبانی می‌کند. بهترین انتخاب برای شروع.</p>
+                                    <a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank" class="download-btn">
+                                        <i class="fas fa-download"></i> دانلود آخرین نسخه
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hiddify-Next -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="accordion-title">Hiddify-Next</span>
+                                <span class="accordion-icon"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+    
