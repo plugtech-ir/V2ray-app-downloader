@@ -69,15 +69,19 @@
         .version-selector label { font-weight: 500; font-size: 0.9rem; }
         .version-selector select {
             padding: 0.5rem 1rem;
-            border-radius: 9999px; /* Rounded corners */
+            border-radius: 9999px;
             border: 2px solid var(--border-color);
             font-family: inherit;
             background-color: white;
             flex-grow: 1;
             transition: border-color 0.3s ease;
         }
-        .version-stable { border-color: var(--success-color) !important; }
-        .version-prerelease { border-color: var(--warning-color) !important; }
+        .version-selector select.version-stable {
+            border-color: var(--success-color);
+        }
+        .version-selector select.version-prerelease {
+            border-color: var(--warning-color);
+        }
 
         .download-group { margin-bottom: 1.5rem; }
         .download-group:last-child { margin-bottom: 0; }
@@ -119,7 +123,7 @@
                 <div id="android-apps" class="app-list">
                     <div class="list-header"><h2><i class="fab fa-android"></i> برنامه‌های اندروید</h2><button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button></div>
                     <div class="app-card"><div class="app-header"><h3><i class="fas fa-rocket"></i> v2rayNG</h3></div><div class="app-body"><p>محبوب‌ترین کلاینت برای اندروید. این صفحه فقط نسخه Universal را برای سازگاری با تمام دستگاه‌ها نمایش می‌دهد.</p><div class="app-content" data-repo="2dust/v2rayNG" data-os="android"></div></div></div>
-                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-fingerprint"></i> Hiddify-Next</h3></div><div class="app-body"><p>کلاینت مدرن و چند پلتفرمی با رابط کاربری زیبا و امکانات پیشرفته.</p><div class="app-content" data-repo="hiddify/hiddify-next" data-os="android"></div></div></div>
+                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-shield-alt"></i> happ VPN</h3></div><div class="app-body"><p>یک کلاینت جایگزین برای اندروید که از طریق گوگل پلی قابل دریافت است.</p><div class="download-links"><a href="https://play.google.com/store/apps/details?id=com.happproxy" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-play"></i> مشاهده در گوگل پلی</a></div></div></div>
                 </div>
                 
                 <!-- iOS Apps -->
@@ -134,7 +138,7 @@
                 <div id="windows-apps" class="app-list">
                     <div class="list-header"><h2><i class="fab fa-windows"></i> برنامه‌های ویندوز</h2><button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button></div>
                     <div class="app-card"><div class="app-header"><h3><i class="fas fa-leaf"></i> v2rayN</h3></div><div class="app-body"><p>کلاینت استاندارد و محبوب ویندوز. نسخه مناسب با پردازنده سیستم خود را انتخاب کنید.</p><div class="app-content" data-repo="2dust/v2rayN" data-os="windows"></div></div></div>
-                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-fingerprint"></i> Hiddify-Next</h3></div><div class="app-body"><p>کلاینت مدرن با رابط کاربری یکپارچه و زیبا برای تمام پلتفرم‌ها.</p><div class="app-content" data-repo="hiddify/hiddify-next" data-os="windows"></div></div></div>
+                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-paw"></i> NekoRay</h3></div><div class="app-body"><p>یک کلاینت چند پلتفرمی بر پایه Qt که از هسته‌های مختلفی مانند Xray و sing-box پشتیبانی می‌کند.</p><div class="app-content" data-repo="MatsuriDayo/nekoray" data-os="windows"></div></div></div>
                     <div class="cpu-helper"><h4><i class="fas fa-microchip"></i> چگونه نوع پردازنده را در ویندوز پیدا کنیم؟</h4><p>۱. به **Settings** (تنظیمات) بروید.</p><p>۲. وارد بخش **System** و سپس **About** شوید.</p><p>۳. در قسمت `System type`، نوع پردازنده شما نوشته شده است (مثلاً `x64-based processor`).</p></div>
                 </div>
                 
@@ -142,7 +146,7 @@
                 <div id="macos-apps" class="app-list">
                     <div class="list-header"><h2><i class="fab fa-apple"></i> برنامه‌های مک</h2><button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button></div>
                      <div class="app-card"><div class="app-header"><h3><i class="fas fa-leaf"></i> v2rayN</h3></div><div class="app-body"><p>نسخه مک کلاینت محبوب v2rayN. فایل DMG مناسب پردازنده سیستم خود را دانلود کنید.</p><div class="app-content" data-repo="2dust/v2rayN" data-os="macos"></div></div></div>
-                     <div class="app-card"><div class="app-header"><h3><i class="fas fa-fingerprint"></i> Hiddify-Next</h3></div><div class="app-body"><p>تجربه کاربری یکپارچه و مدرن برای مک، با پشتیبانی از پروتکل‌های جدید.</p><div class="app-content" data-repo="hiddify/hiddify-next" data-os="macos"></div></div></div>
+                     <div class="app-card"><div class="app-header"><h3><i class="fas fa-paper-plane"></i> V2RayU</h3></div><div class="app-body"><p>یک کلاینت ساده و محبوب برای مک که به خوبی با سیستم‌عامل یکپارچه می‌شود و در منوبار قرار می‌گیرد.</p><div class="app-content" data-repo="yanue/V2rayU" data-os="macos"></div></div></div>
                      <div class="cpu-helper"><h4><i class="fas fa-microchip"></i> چگونه نوع پردازنده را در مک پیدا کنیم؟</h4><p>۱. روی **منوی اپل** () در گوشه بالا سمت چپ کلیک کنید.</p><p>۲. گزینه **About This Mac** را انتخاب کنید.</p><p>۳. اگر در بخش `Chip` عبارت **Apple M1/M2/M3** را دیدید، پردازنده شما **ARM64** است. در غیر این صورت، **Intel (x64)** است.</p></div>
                 </div>
                 
@@ -150,7 +154,7 @@
                 <div id="linux-apps" class="app-list">
                     <div class="list-header"><h2><i class="fab fa-linux"></i> برنامه‌های لینوکس</h2><button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-right"></i> بازگشت</button></div>
                     <div class="app-card"><div class="app-header"><h3><i class="fas fa-leaf"></i> v2rayN</h3></div><div class="app-body"><p>نسخه لینوکس کلاینت محبوب v2rayN. فایل مناسب توزیع و پردازنده خود را دانلود کنید.</p><div class="app-content" data-repo="2dust/v2rayN" data-os="linux"></div></div></div>
-                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-fingerprint"></i> Hiddify-Next</h3></div><div class="app-body"><p>کلاینت گرافیکی و مدرن که در قالب AppImage ارائه می‌شود و نصب آسانی دارد.</p><div class="app-content" data-repo="hiddify/hiddify-next" data-os="linux"></div></div></div>
+                    <div class="app-card"><div class="app-header"><h3><i class="fas fa-paw"></i> NekoRay</h3></div><div class="app-body"><p>یک کلاینت چند پلتفرمی بر پایه Qt که در قالب AppImage ارائه شده و نصب آسانی دارد.</p><div class="app-content" data-repo="MatsuriDayo/nekoray" data-os="linux"></div></div></div>
                     <div class="cpu-helper"><h4><i class="fas fa-microchip"></i> چگونه نوع پردازنده را در لینوکس پیدا کنیم؟</h4><p>۱. **راه ساده (گرافیکی):** به `Settings > About` بروید. نوع سیستم عامل (OS Type) معمولاً `64-bit` را نشان می‌دهد.</p><p>۲. **راه دقیق (ترمینال):** یک ترمینال باز کنید و دستور <code>uname -m</code> را وارد کنید. خروجی `x86_64` به معنی **x64** و `aarch64` به معنی **ARM64** است.</p></div>
                 </div>
             </div>
@@ -318,13 +322,12 @@
 
         function renderGenericDownloads(assets, os, container, repo) {
             const patterns = {
-                android: [/universal\.apk$/i, /arm64-v8a\.apk$/i],
+                android: [/\.apk$/i],
                 windows: [/\.exe$/i, /\.msi$/i, /\.zip$/i],
                 macos: [/\.dmg$/i, /\.zip$/i],
-                linux: [/\.AppImage$/i, /\.deb$/i, /\.rpm$/i]
+                linux: [/\.AppImage$/i, /\.deb$/i, /\.rpm$/i, /\.tar\.gz$/i, /\.tar\.xz$/i]
             };
             
-            // SPECIAL CASE: For v2rayNG, only show universal apk
             if (repo === '2dust/v2rayNG' && os === 'android') {
                 patterns.android = [/universal\.apk$/i];
             }
@@ -333,7 +336,7 @@
             
             const installers = foundAssets.filter(a => /\.(exe|msi|dmg|deb|rpm|AppImage)$/i.test(a.name));
             if (installers.length > 0) {
-                foundAssets = foundAssets.filter(a => !a.name.endsWith('.zip') || installers.every(i => getArchitecture(i.name) !== getArchitecture(a.name)));
+                foundAssets = foundAssets.filter(a => !/\.(zip|tar\.gz|tar\.xz)$/i.test(a.name) || installers.every(i => getArchitecture(i.name) !== getArchitecture(a.name)));
             }
 
             let linksHtml = '';
@@ -353,7 +356,7 @@
             if (!label) {
                 if (/\.apk$/i.test(name)) { icon = 'fa-robot'; label = 'فایل نصب اندروید'; }
                 else if (/\.(exe|msi)$/i.test(name)) { icon = 'fa-cogs'; label = 'فایل نصب ویندوز'; }
-                else if (/\.zip$/i.test(name)) { icon = 'fa-file-archive'; label = 'فایل فشرده برنامه'; }
+                else if (/\.(zip|tar\.gz|tar\.xz)$/i.test(name)) { icon = 'fa-file-archive'; label = 'فایل فشرده برنامه'; }
                 else if (/\.dmg$/i.test(name)) { icon = 'fa-apple'; label = 'فایل نصب مک (DMG)'; }
                 else if (/\.deb$/i.test(name)) { icon = 'fab fa-debian'; label = 'فایل deb'; }
                 else if (/\.rpm$/i.test(name)) { icon = 'fab fa-redhat'; label = 'فایل rpm'; }
