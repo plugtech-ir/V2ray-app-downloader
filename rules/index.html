@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قوانین مجموعه - WOLF VPN</title>
+    <title>قوانین مجموعه - وُلف وی پی ان</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- تعریف فونت آراد --- */
@@ -37,56 +37,51 @@
             background-color: #f8fafc;
             color: var(--text-color);
             line-height: 1.8;
-            display: grid;
-            place-items: center;
-            min-height: 100vh;
-            padding: 2rem 1rem;
         }
 
-        .container { 
-            width: 100%; 
-            max-width: 800px; 
-        }
-
-        .main-card { 
-            background-color: white; 
-            border-radius: var(--border-radius); 
-            box-shadow: var(--shadow); 
-            overflow: hidden; 
-        }
-
-        .card-header { 
-            padding: 2rem; 
-            text-align: center; 
-            background: linear-gradient(135deg, var(--primary-color), #4f46e5);
-            color: white;
-        }
-        .card-header h1 { 
-            font-size: 1.8rem; 
-            font-weight: bold; 
-            margin: 0;
+        /* --- انیمیشن بارگذاری --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 0.75rem;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary-light);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .card-body { 
-            padding: 2.5rem; 
-        }
-
-        .rules-list { 
-            list-style: none; 
-            padding: 0; 
+        #page-content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+            padding: 2rem 1rem;
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .rule-item { 
-            display: flex; 
-            align-items: flex-start; 
-            gap: 1.5rem; 
-        }
+
+        .container { width: 100%; max-width: 800px; }
+        .main-card { background-color: white; border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; }
+        .card-header { padding: 2rem; text-align: center; background: linear-gradient(135deg, var(--primary-color), #4f46e5); color: white; }
+        .card-header h1 { font-size: 1.8rem; font-weight: bold; margin: 0; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+        .card-body { padding: 2.5rem; }
+        .rules-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+        .rule-item { display: flex; align-items: flex-start; gap: 1.5rem; }
         .rule-number {
             display: flex;
             align-items: center;
@@ -99,56 +94,60 @@
             font-weight: bold;
             font-size: 1.1rem;
         }
-        .rule-text {
-            font-size: 1rem;
-            color: var(--light-text);
-        }
-        .rule-text strong {
-            color: var(--text-color);
-        }
-
-        .card-footer { 
-            padding: 1.5rem; 
-            text-align: center; 
-            background-color: #f9fafb; 
-            border-top: 1px solid var(--border-color); 
-        }
-        .card-footer a { 
-            color: var(--primary-color); 
-            text-decoration: none; 
-            font-weight: bold;
-            transition: color 0.2s ease;
-        }
-        .card-footer a:hover {
-            color: #4338ca;
-        }
+        .rule-text { font-size: 1rem; color: var(--light-text); }
+        .rule-text strong { color: var(--text-color); }
+        .rule-text a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        .card-footer { padding: 1.5rem; text-align: center; background-color: #f9fafb; border-top: 1px solid var(--border-color); }
+        .card-footer a { color: var(--primary-color); text-decoration: none; font-weight: bold; transition: color 0.2s ease; }
+        .card-footer a:hover { color: #4338ca; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="main-card">
-            <div class="card-header">
-                <h1><i class="fas fa-gavel"></i> قوانین مجموعه WOLF VPN 🐺</h1>
-            </div>
-            <div class="card-body">
-                <ul class="rules-list">
-                    <li class="rule-item"><div class="rule-number">1</div><div class="rule-text">به هیچ وجه اشتراک های خودتون رو داخل <strong>پیام رسان های ایرانی</strong> (بله، روبیکا، ایتا و...) و همچنین پیامک به هیچ وجه ارسال نکنید.</div></li>
-                    <li class="rule-item"><div class="rule-number">2</div><div class="rule-text">به پشتیبانی در <strong>تایم مقرر (از ساعت ۱۲ الی ۲۴)</strong> پیام بدید، چون تایم پشتیبانی در این بازه هست.</div></li>
-                    <li class="rule-item"><div class="rule-number">3</div><div class="rule-text">برای خرید اشتراک از ربات حتما لینکی که در آخر این پیام گزاشته میشه رو مشاهده کنید (برای کسانی که اطلاع ندارند چجوری اشتراک تهیه کنن).</div></li>
-                    <li class="rule-item"><div class="rule-number">4</div><div class="rule-text">لطفا به <strong>مبلغ پرداختی</strong> که ربات بهتون اطلاع میده دقت کنید و همون مقدار واریز کنید.</div></li>
-                    <li class="rule-item"><div class="rule-number">5</div><div class="rule-text"><strong>عکس فیش واریزی</strong> تون رو حتما ارسال کنید و لطفا فقط یکبار عکس فیش رو بفرستید و از تکرار کردن اجتناب کنید.</div></li>
-                    <li class="rule-item"><div class="rule-number">6</div><div class="rule-text">در صورت هرگونه مشکل، میتونید از بخش <strong>تیکت</strong>، سوال یا مشکلتون رو بیان کنید و یا در صورت نیاز به یکی از آیدی هایی که در آخر این پیام قرار داده شده پیام بدید.</div></li>
-                    <li class="rule-item"><div class="rule-number">7</div><div class="rule-text">پس از تموم شدن اشتراک، اشتراک شما تا <strong>۷ روز</strong> جهت تمدید در ربات نگهداری میشه و بعد از ۷ روز اشتراک شما پاک میشه و باید اشتراک جدید تهیه کنید.</div></li>
-                    <li class="rule-item"><div class="rule-number">8</div><div class="rule-text">تمامی <strong>آموزش های مورد نیاز</strong> در کانال قرار داده شده، پس لطفا به پشتیبانی مراجعه نکنید مگر در صورت نیاز.</div></li>
-                    <li class="rule-item"><div class="rule-number">9</div><div class="rule-text">اشتراک ها محدودیت کاربر ندارن ولی بیش از <strong>۳ کاربر اتصال همزمان</strong> به اشتراکتون داشته باشن، ممکنه کاهش سرعت داشته باشید.</div></li>
-                    <li class="rule-item"><div class="rule-number">10</div><div class="rule-text">در صورت ارسال <strong>رسید فیک</strong> از ربات مسدود خواهید شد.</div></li>
-                    <li class="rule-item"><div class="rule-number">11</div><div class="rule-text">تا حد امکان از پیام رسان ها و برنامه های ایرانی با <strong>VPN روشن</strong> استفاده نکنید.</div></li>
-                </ul>
-            </div>
-            <div class="card-footer">
-                <a href="../"><i class="fas fa-arrow-right"></i> بازگشت به صفحه دانلود</a>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="page-content">
+        <div class="container">
+            <div class="main-card">
+                <div class="card-header">
+                    <h1><i class="fas fa-gavel"></i> قوانین مجموعه وُلف وی پی ان 🐺</h1>
+                </div>
+                <div class="card-body">
+                    <ul class="rules-list">
+                        <li class="rule-item"><div class="rule-number">۱</div><div class="rule-text">به هیچ وجه اشتراک های خودتون رو داخل <strong>پیام رسان های ایرانی</strong> (بله، روبیکا، ایتا و...) و همچنین پیامک به هیچ وجه ارسال نکنید.</div></li>
+                        <li class="rule-item"><div class="rule-number">۲</div><div class="rule-text">برای خرید اشتراک از ربات حتما لینکی که در آخر این پیام گزاشته میشه رو مشاهده کنید (برای کسانی که اطلاع ندارند چجوری اشتراک تهیه کنن).</div></li>
+                        <li class="rule-item"><div class="rule-number">۳</div><div class="rule-text">لطفا به <strong>مبلغ پرداختی</strong> که ربات بهتون اطلاع میده دقت کنید و همون مقدار واریز کنید.</div></li>
+                        <li class="rule-item"><div class="rule-number">۴</div><div class="rule-text"><strong>عکس فیش واریزی</strong> تون رو حتما ارسال کنید و لطفا فقط یکبار عکس فیش رو بفرستید و از تکرار کردن اجتناب کنید.</div></li>
+                        <li class="rule-item"><div class="rule-number">۵</div><div class="rule-text">در صورت هرگونه مشکل، میتونید به پشتیبانی ما مراجعه کرده، سوال یا مشکلتون رو بیان کنید. پشتیبانی: <a href="https://t.me/Wolf_support02" target="_blank" rel="noopener noreferrer">Wolf_support02</a></div></li>
+                        <li class="rule-item"><div class="rule-number">۶</div><div class="rule-text">پس از تموم شدن اشتراک، اشتراک شما تا <strong>۷ روز</strong> جهت تمدید در ربات نگهداری میشه و بعد از ۷ روز اشتراک شما پاک میشه و باید اشتراک جدید تهیه کنید.</div></li>
+                        <li class="rule-item"><div class="rule-number">۷</div><div class="rule-text">تمامی <strong>آموزش های مورد نیاز</strong> قرار داده شده، پس لطفا به پشتیبانی مراجعه نکنید مگر در صورت نیاز.</div></li>
+                        <li class="rule-item"><div class="rule-number">۸</div><div class="rule-text">اشتراک ها محدودیت کاربر ندارند.</div></li>
+                        <li class="rule-item"><div class="rule-number">۹</div><div class="rule-text">در صورت ارسال <strong>رسید فیک</strong> از ربات مسدود خواهید شد.</div></li>
+                        <li class="rule-item"><div class="rule-number">۱۰</div><div class="rule-text">تا حد امکان از پیام رسان ها و برنامه های ایرانی با <strong>VPN روشن</strong> استفاده نکنید.</div></li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="../"><i class="fas fa-arrow-right"></i> بازگشت به صفحه دانلود</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            const content = document.getElementById('page-content');
+            
+            loader.style.opacity = '0';
+            content.style.opacity = '1';
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500); // Match the transition duration
+        });
+    </script>
+
 </body>
 </html>
